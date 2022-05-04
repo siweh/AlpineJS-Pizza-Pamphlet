@@ -1,0 +1,72 @@
+body {
+    background: white;
+    font-family: arial, sans-serif;
+    background-color: cadetblue;
+    font-size: 0.75em;
+  }
+
+  .cart{
+      border-radius: 8px;
+      background-color: whitesmoke;
+      padding: 6px 6px;
+  }
+  
+  .small {
+    background-color: #e035d2;
+  }
+  
+  .medium {
+    background-color: #3dcfe2;
+  }
+  
+  .large {
+    background-color: #e0d433;
+    flex : 2;
+  }
+  
+  .specials div {
+    flex: 1;
+    /* border: 1px solid lightgrey; */
+    margin: 0em;
+    padding: 1em;
+    
+  }
+  
+  .small img {
+    width: 4em;
+  }
+  
+  .medium img {
+    width: 5em;
+  }
+  
+  
+  .large img {
+    width: 7em;
+    
+  }
+  
+  .footer {
+    display: flex;
+  }
+  
+  .footer div {
+    flex: 1;
+  /*   border: 1px solid;
+     */  margin-top: 1em;
+    padding: 1em;
+    background-color: rgb(228, 83, 64);
+  }
+  
+  
+  @media (min-width: 768px){
+  
+    .specials {
+      display: flex;
+    }
+    
+    body {
+      font-size: 1em;
+    }
+    
+  }  

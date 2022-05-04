@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <link rel="stylesheet" href="./styles/style.css">
+  <link rel="stylesheet" href="./styles/simple-grid-min.css" />
+  <script
+      src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.0/dist/alpine.min.js"
+      defer
+    ></script>
+  <title>Pizza Pamphlet</title>
+</head>
+<body>
+  <div>
+    <div class="row">
+        <div class="container">`
+            <div class="col-10">
+                <h1 style="text-align: center;">Perfect Pizza</h1>
+            </div>
+            <div class="col-2">
+                <h4 class="cart">Cart</h4>
+                <br>
+                <label>
+                    <input type="radio" name="check button" id="add">Add</label>
+                <br>
+                <label>
+                    <input type="radio" name="check button" id="remove">Remove</label>
+            </div>
+        </div>
+    </div>
+    <p x-text="title"></p>
+    <div class="specials">
+        <div class="medium" x-data="{ title: }" 
+        x-init="setInterval(function(){
+            title;
+         }, 1000);
+        ">
+          <img  src="https://image.shutterstock.com/image-vector/italian-pizza-tomato-sausage-olive-600w-554691619.jpg" alt="">
+          <h2>Medium Pizza</h2>
+          <h3>R78.99</h3>
+          <i>
+              <ul>
+                  <li>medium margeritha pizza with 3 toppings max.</li>
+                  <li>2 or less meat topping.</li>
+                  <li>3 or less other toppings.</li>
+              </ul>
+          </i>
+          <p x-text="title">
+             
+          </p>
+          <button class="cart" @click="title='Successfully added!'">Add to cart</button>
+        </div>
+        <div class="large" x-data="{ count: 1}">
+          <img  src="https://image.shutterstock.com/image-vector/italian-pizza-tomato-sausage-olive-600w-554691619.jpg" alt="">
+          <h2>Large Pizza</h2>
+          <h3>R114.99</h3>
+            <i>
+            <ul>
+                <li>large margeritha pizza with 3 toppings max.</li>
+                <li>3 meat toppings max.</li>
+                <li>3 or less other toppings.</li>
+            </ul>
+          </i>
+          <button class="cart" @click="alert('Successfully added!')">Add to cart</button>
+        </div>
+        <div class="small" x-data="{ count: 1}">
+          <img  src="https://image.shutterstock.com/image-vector/italian-pizza-tomato-sausage-olive-600w-554691619.jpg" alt="">
+          <h2>Small Pizza</h2>
+          <h3>R48.99</h3>
+          <i>
+            <ul>
+              <li>small pizza with 3 toppings</li>
+              <li>1 meat topping.</li>
+              <li>3 or less other toppings.</li>
+            </ul>
+          </i>
+          <button class="cart" @click="alert('Successfully added!')">Add to cart</button>
+        </div>
+    </div>
+    <br>
+    <div>
+        <button class="order">Buy pizza</button>
+    </div>
+    <br>
+    <div class="footer">
+        <div class="contact">
+            <strong>Contact us at:</strong>
+            (021)-566-1030
+          
+          <strong>twitter /fb /insta </strong> @perfectpizza
+        </div> 
+        <div class="address">
+            Pizza Perfect
+            <br>
+            Plaza Road
+            <br>
+            New Town
+            <br>
+            6488
+        </div>
+    </div>
+  </div>
+</body>
+</html>
