@@ -1,105 +1,129 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-  <link rel="stylesheet" href="./styles/style.css">
-  <link rel="stylesheet" href="./styles/simple-grid-min.css" />
-  <script
-      src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.0/dist/alpine.min.js"
-      defer
-    ></script>
-  <title>Pizza Pamphlet</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="./styles/style.css" />
+    <link rel="stylesheet" href="./styles/simple-grid-min.css" />
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.0/dist/alpine.min.js" defer></script>
+    <title>Pizza Pamphlet</title>
 </head>
+
 <body>
-  <div>
-    <div class="row">
-        <div class="container">`
-            <div class="col-10">
-                <h1 style="text-align: center;">Perfect Pizza</h1>
+    <h1 style="text-align: center">Perfect Pizza</h1>
+    <div
+        x-data="{large: 0, medium:0, small:0, smallPrice: 48.99, mediumPrice: 78.99, largePrice: 114.99, adding: '+', minus: '-', buttonClicked: false }">
+        <div class="action" x-show="large != 0 || medium != 0 || small != 0">
+            <template x-if="large>0">
+                <div class="largePizza" x-text="medium != 0">
+                        <button @click="buttonClicked = ! buttonClicked" @click="large++">+</button>
+                        <span x-text="large"></span>
+                    <!-- <template x-if="!buttonClicked">
+                        <button @click="large--">-</button>
+                    </template> -->
+                    <div x-show="buttonClicked" @click.outside="buttonClicked = false"></div>
+                    <span x-text="large largePrice.toFixed(2)"></span>
+                </div>
+            </template>
+            <template x-if="medium>0">
+                <div class="mediumPizza" x-show="medium != 0">
+                    <template x-if="!buttonClicked">
+                        <button @click="medium++">+</button>
+                        <span x-text="medium"></span>
+                    </template>
+                    <template x-if="!buttonClicked">
+                        <button @click="medium--">-</button>
+                    </template>
+                    <span x-text="medium *mediumPrice.toFixed(2)"></span>
+                </div>
+            </template>
+            <template x-if="small>0">
+                <div class="smallPizza" x-show="small != 0">
+                    <template x-if="!buttonClicked">
+                        <button @click="small++">+</button>
+                        <span x-text="small"></span>
+                    </template>
+                    <template x-if="!buttonClicked">
+                        <button @click="small--">-</button>
+                    </template>
+                    <span x-text="small *smallPrice.toFixed(2)"></span>
+                </div>
+            </template>
+            <button @click="buttonClicked">Orders</button>
+        </div>
+        <div class="specials">
+            <div class="medium">
+                <img src="https://image.shutterstock.com/image-vector/italian-pizza-tomato-sausage-olive-600w-554691619.jpg"
+                    alt="" />
+                <h2>Medium Pizza</h2>
+                <h3>R78.99</h3>
+                <i>
+                    <ul>
+                        <li>medium margeritha pizza with 3 toppings max.</li>
+                        <li>2 or less meat topping.</li>
+                        <li>3 or less other toppings.</li>
+                    </ul>
+                </i>
+
+                <button class="cart" @click="medium++">Add to cart</button>
             </div>
-            <div class="col-2">
-                <h4 class="cart">Cart</h4>
-                <br>
-                <label>
-                    <input type="radio" name="check button" id="add">Add</label>
-                <br>
-                <label>
-                    <input type="radio" name="check button" id="remove">Remove</label>
+            <div class="large">
+                <img src="https://image.shutterstock.com/image-vector/italian-pizza-tomato-sausage-olive-600w-554691619.jpg"
+                    alt="" />
+                <h2>Large Pizza</h2>
+                <h3>R114.99</h3>
+                <i>
+                    <ul>
+                        <li>large margeritha pizza with 3 toppings max.</li>
+                        <li>3 meat toppings max.</li>
+                        <li>3 or less other toppings.</li>
+                    </ul>
+                </i>
+                <!-- <template x-for="order in addPizza" :key="order.id">
+                <div x-text="order.title"></div>
+                    <button class="cart" x-on:click="orders.push({name: numberOfOrders})">Add to cart</button>
+                    <--<span x-text="order.name"></span>
+            </template> -->
+                <button class="cart" @click="large++">Add to cart</button>
+            </div>
+            <div class="small">
+                <img src="https://image.shutterstock.com/image-vector/italian-pizza-tomato-sausage-olive-600w-554691619.jpg"
+                    alt="" />
+                <h2>Small Pizza</h2>
+                <h3>R48.99</h3>
+                <i>
+                    <ul>
+                        <li>small pizza with 3 toppings</li>
+                        <li>1 meat topping.</li>
+                        <li>3 or less other toppings.</li>
+                    </ul>
+                </i>
+                <button class="cart" @click="small++">Add to cart</button>
             </div>
         </div>
+        <!-- <div>
+            <button class="order">Buy pizza</button>
+        </div> -->
     </div>
-    <p x-text="title"></p>
-    <div class="specials">
-        <div class="medium" x-data="{ title: }" 
-        x-init="setInterval(function(){
-            title;
-         }, 1000);
-        ">
-          <img  src="https://image.shutterstock.com/image-vector/italian-pizza-tomato-sausage-olive-600w-554691619.jpg" alt="">
-          <h2>Medium Pizza</h2>
-          <h3>R78.99</h3>
-          <i>
-              <ul>
-                  <li>medium margeritha pizza with 3 toppings max.</li>
-                  <li>2 or less meat topping.</li>
-                  <li>3 or less other toppings.</li>
-              </ul>
-          </i>
-          <p x-text="title">
-             
-          </p>
-          <button class="cart" @click="title='Successfully added!'">Add to cart</button>
-        </div>
-        <div class="large" x-data="{ count: 1}">
-          <img  src="https://image.shutterstock.com/image-vector/italian-pizza-tomato-sausage-olive-600w-554691619.jpg" alt="">
-          <h2>Large Pizza</h2>
-          <h3>R114.99</h3>
-            <i>
-            <ul>
-                <li>large margeritha pizza with 3 toppings max.</li>
-                <li>3 meat toppings max.</li>
-                <li>3 or less other toppings.</li>
-            </ul>
-          </i>
-          <button class="cart" @click="alert('Successfully added!')">Add to cart</button>
-        </div>
-        <div class="small" x-data="{ count: 1}">
-          <img  src="https://image.shutterstock.com/image-vector/italian-pizza-tomato-sausage-olive-600w-554691619.jpg" alt="">
-          <h2>Small Pizza</h2>
-          <h3>R48.99</h3>
-          <i>
-            <ul>
-              <li>small pizza with 3 toppings</li>
-              <li>1 meat topping.</li>
-              <li>3 or less other toppings.</li>
-            </ul>
-          </i>
-          <button class="cart" @click="alert('Successfully added!')">Add to cart</button>
-        </div>
-    </div>
-    <br>
-    <div>
-        <button class="order">Buy pizza</button>
-    </div>
-    <br>
+    <br />
     <div class="footer">
         <div class="contact">
             <strong>Contact us at:</strong>
             (021)-566-1030
-          
-          <strong>twitter /fb /insta </strong> @perfectpizza
-        </div> 
+
+            <strong>twitter /fb /insta </strong> @perfectpizza
+        </div>
         <div class="address">
             Pizza Perfect
-            <br>
+            <br />
             Plaza Road
-            <br>
+            <br />
             New Town
-            <br>
+            <br />
             6488
         </div>
     </div>
-  </div>
 </body>
+
 </html>
