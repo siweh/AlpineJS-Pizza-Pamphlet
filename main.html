@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <div x-data="{ large: 0, medium: 0, small: 0, smallTotalPrice: 48.99, mediumTotalPrice: 78.99, largeTotalPrice: 114.99}">
+    <div x-data="{ large: 0, medium: 0, small: 0, smallTotalPrice: 48.99, mediumTotalPrice: 78.99, largeTotalPrice: 114.99, addBtnClicked: false}">
         <div>
             <div>
                 <h1>Perfect Pizza</h1>
@@ -18,49 +18,64 @@
 
             <div class="cartTotal">
                 <strong>Total price</strong>
-                <span class="cartTotalPrice" >0.00</span>
+                <span class="cartTotalPrice" x-text="(small *smallTotalPrice+ medium *mediumTotalPrice + large *largeTotalPrice).toFixed(2)">0.00</span>
                 <a href="#">
                     <img src="shopping-cart.png" alt="">
                 </a>
             </div>
 
 
-            <div class="cart">
+            <div class="cart" >
                 <h3>Shopping Cart</h3>
                 <img src="shopping-cart.png" alt="">
-                <table>
-                    <tr>
-                        <td><strong>Small pizzas total:</strong></td>
-                        <td><span class="smallTotalPrice" x-text="small *smallTotalPrice.toFixed(2)">0.00</span></td>
-                        <td>
-                            <button id="addBtn" @click="small++" >+</button>
-                            <button style="padding:3px" @click="small--">-</button>
-                        </td>
-                    </tr>
 
-                    <tr>
-                        <td><strong>Medium pizzas total:</strong></td>
-                        <td><span class="mediumTotalPrice" x-text="medium *mediumTotalPrice.toFixed(2)">0.00</span></td>
-                        <td>
-                            <button id="addBtn" @click="medium++">+</button>
-                            <button style="padding:3px" @click="medium--">-</button>
-                        </td>
-                    </tr>
-                    
-                    <tr>
-                            <td><strong>Large pizza total:</strong></td>
-                            <td><span class="largeTotalPrice" x-text="large *largeTotalPrice.toFixed(2)">0.00</span></td>
+                <table>
+                    <div x-show="small > 0 || medium > 0 || large > 0">
+                            <template x-if="small > 0">
+                                <div x-show="addBtnClicked">
+                                    <tr>
+                                        <td><strong>Small pizzas total:</strong></td>
+                                        <td><span class="smallTotalPrice" x-text="(small *smallTotalPrice).toFixed(2)" >0.00</span></td>
+                                        <td>
+                                            <button id="addBtn" @click="small++" >+</button>
+                                            <button style="padding:3px" @click="small--">-</button>
+                                        </td>
+                                    </tr>
+                                </div>
+                            </template>
                         
-                            <td>
-                                
-                                <button id="addBtn" @click="large++">+</button>
-                                <button style="padding:3px" @click="large--">-</button>
-                            </td>
-                    </tr>
-                    <tr>
-                        <td><strong>Total price</strong></td>
-                        <td><span class="totalPrice" x-text="small+medium+large">0.00</span></td>
-                    </tr>
+                        <template x-if="medium > 0">
+                            <div x-show="addBtnClicked">
+                                <tr>
+                                    <td><strong>Medium pizzas total:</strong></td>
+                                    <td><span class="mediumTotalPrice" x-text="(medium *mediumTotalPrice).toFixed(2)">0.00</span></td>
+                                    <td>
+                                        <button id="addBtn" @click="medium++">+</button>
+                                        <button style="padding:3px" @click="medium--">-</button>
+                                    </td>
+                                </tr>
+                            </div>
+                        </template>
+                    <template x-if="large > 0">
+                        <div x-show="addBtnClicked">
+                        <tr>
+                                <td><strong>Large pizza total:</strong></td>
+                                <td><span class="largeTotalPrice" x-text="(large *largeTotalPrice).toFixed(2)">0.00</span></td>
+                            
+                                <td>
+                                    
+                                    <button id="addBtn" @click="large++">+</button>
+                                    <button style="padding:3px" @click="large--">-</button>
+                                </td>
+                        </tr>
+                    </div>
+                    </template>
+                
+                        <tr>
+                            <td><strong>Total price</strong></td>
+                            <td><span class="totalPrice" x-text="(small *smallTotalPrice+ medium *mediumTotalPrice + large *largeTotalPrice).toFixed(2)">0.00</span></td>
+                        </tr>
+                </div>
                 </table>
             </div>
         </div>
@@ -78,7 +93,7 @@
                             <li>3 or less other toppings.</li>
                         </ul>
                     </i>
-                    <button class="cart" @click="medium++">Add to cart</button>
+                    <button class="cart" @click="medium++, addBtnClicked = ! addBtnClicked">Add to cart</button>
                 </div>
                 <div class="large">
                     <img src="https://image.shutterstock.com/image-vector/italian-pizza-tomato-sausage-olive-600w-554691619.jpg"
@@ -92,7 +107,7 @@
                             <li>3 or less other toppings.</li>
                         </ul>
                     </i>
-                    <button class="cart" @click="large++">Add to cart</button>
+                    <button class="cart" @click="large++, addBtnClicked = ! addBtnClicked">Add to cart</button>
                 </div>
                 <div class="small">
                     <img src="https://image.shutterstock.com/image-vector/italian-pizza-tomato-sausage-olive-600w-554691619.jpg"
@@ -106,7 +121,7 @@
                             <li>3 or less other toppings.</li>
                         </ul>
                     </i>
-                    <button class="cart" @click="small++">Add to cart</button>
+                    <button class="cart" @click="small++, addBtnClicked = ! addBtnClicked">Add to cart</button>
                 </div>
             </div>
         </div>
