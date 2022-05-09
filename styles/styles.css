@@ -75,7 +75,7 @@ body {
 		/* margin: auto; */
 		/* width: 40%; */
 		/* min-height: 15em; */
-		background-color: #CDD93F;
+		background-color: #d9963f;
 		top: 0em;
 		right: 0em;
 		margin-right: 1em;
@@ -95,7 +95,7 @@ body {
 		/* margin: auto; */
 		width: 20%;
 		/* min-height: 15em; */
-		background-color: #CDD93F;
+		background-color: #d9963f;
 		top: 0em;
 		right: 0em;
 		margin-right: 1em;
@@ -115,7 +115,7 @@ body {
 	}
 
 	.cart td {
-		border-top: 1px solid snow;
+		border-top: 1px solid black;
 	} 
 
 	.cart th, td {
@@ -145,15 +145,15 @@ body {
 	}
 
   	.small {
-		background-color: #E03571;
+		background-color: #dde035;
   	}
   
   .medium {
-	background-color: #E2AE3D;
+	background-color: #e2633d;
   }
   
   .large {
-	background-color: #E06733;
+	background-color: #e03392;
 	flex : 2;
   }
   
