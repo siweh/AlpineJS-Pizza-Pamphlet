@@ -31,21 +31,18 @@
 
                 <table>
                     <div x-show="small > 0 || medium > 0 || large > 0">
-                            <template x-if="small > 0">
-                                <div x-show="addBtnClicked">
-                                    <tr>
-                                        <td><strong>Small pizzas total:</strong></td>
-                                        <td><span class="smallTotalPrice" x-text="(small *smallTotalPrice).toFixed(2)" >0.00</span></td>
-                                        <td>
-                                            <button id="addBtn" @click="small++" >+</button>
-                                            <button style="padding:3px" @click="small--">-</button>
-                                        </td>
-                                    </tr>
-                                </div>
-                            </template>
+                        <template x-if="small > 0">
+                                <tr>
+                                    <td><strong>Small pizzas total:</strong></td>
+                                    <td><span class="smallTotalPrice" x-text="(small *smallTotalPrice).toFixed(2)" >0.00</span></td>
+                                    <td>
+                                        <button id="addBtn" @click="small++" >+</button>
+                                        <button style="padding:3px" @click="small--">-</button>
+                                    </td>
+                                </tr>
+                        </template>
                         
                         <template x-if="medium > 0">
-                            <div x-show="addBtnClicked">
                                 <tr>
                                     <td><strong>Medium pizzas total:</strong></td>
                                     <td><span class="mediumTotalPrice" x-text="(medium *mediumTotalPrice).toFixed(2)">0.00</span></td>
@@ -54,28 +51,23 @@
                                         <button style="padding:3px" @click="medium--">-</button>
                                     </td>
                                 </tr>
-                            </div>
                         </template>
-                    <template x-if="large > 0">
-                        <div x-show="addBtnClicked">
-                        <tr>
-                                <td><strong>Large pizza total:</strong></td>
-                                <td><span class="largeTotalPrice" x-text="(large *largeTotalPrice).toFixed(2)">0.00</span></td>
-                            
-                                <td>
-                                    
-                                    <button id="addBtn" @click="large++">+</button>
-                                    <button style="padding:3px" @click="large--">-</button>
-                                </td>
-                        </tr>
-                    </div>
-                    </template>
-                
+                        <template x-if="large > 0">
+                                <tr>
+                                    <td><strong>Large pizza total:</strong></td>
+                                    <td><span class="largeTotalPrice" x-text="(large *largeTotalPrice).toFixed(2)">0.00</span></td>
+                                    <td>
+                                        
+                                        <button id="addBtn" @click="large++">+</button>
+                                        <button style="padding:3px" @click="large--">-</button>
+                                    </td>
+                                </tr>
+                        </template>
                         <tr>
                             <td><strong>Total price</strong></td>
                             <td><span class="totalPrice" x-text="(small *smallTotalPrice+ medium *mediumTotalPrice + large *largeTotalPrice).toFixed(2)">0.00</span></td>
                         </tr>
-                </div>
+                    </div>
                 </table>
             </div>
         </div>
