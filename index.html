@@ -1,141 +1,230 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <link rel="stylesheet" href="./styles/styles.css">
-    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.0/dist/alpine.min.js" defer></script>
-    <title>JS Bin</title>
-</head>
-
-<body>
-    <div x-data="{ large: 0, medium: 0, small: 0, smallTotalPrice: 48.99, mediumTotalPrice: 78.99, largeTotalPrice: 114.99, addBtnClicked: false}">
-        <div>
-            <div>
-                <h1>Perfect Pizza</h1>
-            </div>
-
-            <div class="cartTotal">
-                <strong>Total price</strong>
-                <span class="cartTotalPrice" x-text="(small *smallTotalPrice+ medium *mediumTotalPrice + large *largeTotalPrice).toFixed(2)">0.00</span>
-                <a href="#">
-                    <img src="shopping-cart.png" alt="">
-                </a>
-            </div>
-
-
-            <div class="cart" >
-                <h3>Shopping Cart</h3>
-                <img src="shopping-cart.png" alt="">
-
-                <table>
-                    <div x-show="small > 0 || medium > 0 || large > 0">
-                        <template x-if="small > 0">
-                                <tr>
-                                    <td><strong>Small pizzas total:</strong></td>
-                                    <td><span class="smallTotalPrice" x-text="(small *smallTotalPrice).toFixed(2)" >0.00</span></td>
-                                    <td>
-                                        <button id="addBtn" @click="small++" >+</button>
-                                        <button style="padding:3px" @click="small--">-</button>
-                                    </td>
-                                </tr>
-                        </template>
-                        
-                        <template x-if="medium > 0">
-                                <tr>
-                                    <td><strong>Medium pizzas total:</strong></td>
-                                    <td><span class="mediumTotalPrice" x-text="(medium *mediumTotalPrice).toFixed(2)">0.00</span></td>
-                                    <td>
-                                        <button id="addBtn" @click="medium++">+</button>
-                                        <button style="padding:3px" @click="medium--">-</button>
-                                    </td>
-                                </tr>
-                        </template>
-                        <template x-if="large > 0">
-                                <tr>
-                                    <td><strong>Large pizza total:</strong></td>
-                                    <td><span class="largeTotalPrice" x-text="(large *largeTotalPrice).toFixed(2)">0.00</span></td>
-                                    <td>
-                                        
-                                        <button id="addBtn" @click="large++">+</button>
-                                        <button style="padding:3px" @click="large--">-</button>
-                                    </td>
-                                </tr>
-                        </template>
-                        <tr>
-                            <td><strong>Total price</strong></td>
-                            <td><span class="totalPrice" x-text="(small *smallTotalPrice+ medium *mediumTotalPrice + large *largeTotalPrice).toFixed(2)">0.00</span></td>
-                        </tr>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="./styles/styles.css" />
+    <link rel="stylesheet" href="./styles/simple-grid-min.css" />
+    <script
+      src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.0/dist/alpine.min.js"
+      defer
+    ></script>
+    <title>Pizza perfect</title>
+  </head>
+  <body>
+        <div x-data="{ large: 0, medium: 0, small: 0, smallTotalPrice: 48.99, mediumTotalPrice: 78.99, largeTotalPrice: 114.99, addBtnClicked: false, amount: '', error: 'Insufficient funds', success: 'Successful purchase', successMsg: '', errorMsg: '', pay: false}">
+                <div class="row">
+                    <div class="col-12">
+                        <h1 style="text-align: center;">Perfect Pizza</h1>
                     </div>
-                </table>
-            </div>
-        </div>
-
-            <div class="specials">
-                <div class="medium">
-                    <img src="https://image.shutterstock.com/image-vector/italian-pizza-tomato-sausage-olive-600w-554691619.jpg"
-                        alt="">
+                </div>
+                <div class="row" x-show="small > 0 || medium > 0 || large > 0">    
+                    <div class="col-10" >
+                        <h3>Shopping Cart </h3>
+                        <table>
+                            <div x-show="small > 0 || medium > 0 || large > 0">
+                            <tr>
+                                <th>Pizza size</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>+/-</th>
+                            </tr>
+                            <template x-if="small > 0">
+                                <tr>
+                                <td>Small pizzas total</td>
+                                <td>
+                                    <span>R</span>
+                                    <span
+                                    class="smallTotalPrice"
+                                    x-text="(small *smallTotalPrice).toFixed(2)"
+                                    >R0.00</span
+                                    >
+                                </td>
+                                <td><span class="smallTotalPrice" x-text="small">0</span></td>
+                                <td>
+                                    <button style="padding: 1px" @click="small++">+</button>
+                                    <button style="padding: 1px" @click="small--">-</button>
+                                </td>
+                                </tr>
+                            </template>
+                            <template x-if="medium > 0">
+                                <tr>
+                                <td>Medium pizzas total</td>
+                                <td>
+                                    <span>R</span>
+                                    <span
+                                    class="mediumTotalPrice"
+                                    x-text="(medium *mediumTotalPrice).toFixed(2)"
+                                    >R0.00</span
+                                    >
+                                </td>
+                                <td>
+                                    <span class="smallTotalPrice" x-text="medium">0</span>
+                                </td>
+                                <td>
+                                    <button style="padding: 1px"id="addBtn" @click="medium++">+</button>
+                                    <button style="padding: 1px" @click="medium--">-</button>
+                                </td>
+                                </tr>
+                            </template>
+                            <template x-if="large > 0">
+                                <tr>
+                                <td>Large pizza total</td>
+                                <td>
+                                    <span>R</span>
+                                    <span
+                                    class="largeTotalPrice"
+                                    x-text="(large *largeTotalPrice).toFixed(2)"></span
+                                    >
+                                    
+                                </td>
+                                <td><span class="smallTotalPrice" x-text="large">0</span></td>
+                                <td>
+                                    <button style="padding: 1px" @click="large++">+</button>
+                                    <button style="padding: 1px" @click="large--">-</button>
+                                </td>
+                                </tr>
+                            </template>
+                            <tr>
+                                <td>Total price</td>
+                                <td>
+                                    <span>R</span>
+                                <span
+                                    class="totalPrice"
+                                    x-text="(small *smallTotalPrice+ medium *mediumTotalPrice + large *largeTotalPrice).toFixed(2)"
+                                    >R0.00</span
+                                >
+                                </td>
+                                <td>
+                                <span class="smallTotalPrice" x-text="medium + large + small"
+                                    >0</span
+                                >
+                                </td>
+                            </tr>
+                            </div>
+                        </table>
+                    </div>
+                    <div class="col-2">
+                        <a href="#">
+                            <img src="./styles/addToCart.png" alt="" style="width: 2em;" />
+                        </a>
+                        <br>
+                        <strong>Total price</strong>
+                        
+                        <br>
+                        <span>R</span>
+                        <span
+                            class="cartTotalPrice"
+                            x-text="(small *smallTotalPrice+ medium *mediumTotalPrice + large *largeTotalPrice).toFixed(2)"
+                            >R0.00</span
+                        >
+                        
+                    </div>
+                </div>
+                <div class="row" x-show="small > 0 || medium > 0 || large > 0">
+                    <div class="col-12 error success">
+                        <form >
+                            <input type="number" placeholder="Enter amount" x-model="amount" x-ref="amountInput">
+                                <button @click="$refs.amountInput">Pay</button>
+                                </form>
+                            <template x-if="amount >= (small *smallTotalPrice+ medium *mediumTotalPrice + large *largeTotalPrice).toFixed(2)">
+                                <span x-text="error"></span>
+                            </template>
+                    </div>
+                </div>
+                <div class="row">
+                <div class="col-4 medium" style="color: white;border-radius: 15px;">
+                    <img
+                    src="./styles/images2.png"
+                    alt=""
+                    style="width: 5em; align-items: center;"
+                    />
                     <h2>Medium Pizza</h2>
                     <h3>R78.99</h3>
                     <i>
-                        <ul>
-                            <li>medium margeritha pizza with 3 toppings max.</li>
-                            <li>2 or less meat topping.</li>
-                            <li>3 or less other toppings.</li>
-                        </ul>
+                    <ul>
+                        <li>medium margeritha pizza with 3 toppings max.</li>
+                        <li>2 or less meat topping.</li>
+                        <li>3 or less other toppings.</li>
+                    </ul>
                     </i>
-                    <button class="cart" @click="medium++, addBtnClicked = ! addBtnClicked">Add to cart</button>
+                    <button
+                    class="addToCartBtn"
+                    @click="medium++, addBtnClicked = ! addBtnClicked"
+                    >
+                    Add to cart
+                    </button>
                 </div>
-                <div class="large">
-                    <img src="https://image.shutterstock.com/image-vector/italian-pizza-tomato-sausage-olive-600w-554691619.jpg"
-                        alt="">
+                <div class="col-4 large" style="border-radius: 15px;">
+                    <img
+                    src="./styles/Gluten-Free-Pizza-3.2-480x360.png"
+                    alt=""
+                    style="width: 10em; align-items: center;"
+                    />
                     <h2>Large Pizza</h2>
                     <h3>R114.99</h3>
                     <i>
-                        <ul>
-                            <li>large margeritha pizza with 3 toppings max.</li>
-                            <li>3 meat toppings max.</li>
-                            <li>3 or less other toppings.</li>
-                        </ul>
+                    <ul>
+                        <li>large margeritha pizza with 3 toppings max.</li>
+                        <li>3 meat toppings max.</li>
+                        <li>3 or less other toppings.</li>
+                    </ul>
                     </i>
-                    <button class="cart" @click="large++, addBtnClicked = ! addBtnClicked">Add to cart</button>
+                    <button
+                    class="addToCartBtn"
+                    @click="large++, addBtnClicked = ! addBtnClicked"
+                    >
+                    Add to cart
+                    </button>
                 </div>
-                <div class="small">
-                    <img src="https://image.shutterstock.com/image-vector/italian-pizza-tomato-sausage-olive-600w-554691619.jpg"
-                        alt="">
+                <div class="col-4 small" style="border-radius: 15px;">
+                    <img
+                    src="./styles/image2.png"
+                    alt=""
+                    style="width: 3em; align-items: center;"
+                    />
                     <h2>Small Pizza</h2>
                     <h3>R48.99</h3>
                     <i>
-                        <ul>
-                            <li>small pizza with 3 toppings</li>
-                            <li>1 meat topping.</li>
-                            <li>3 or less other toppings.</li>
-                        </ul>
+                    <ul>
+                        <li>small pizza with 3 toppings</li>
+                        <li>1 meat topping.</li>
+                        <li>3 or less other toppings.</li>
+                    </ul>
                     </i>
-                    <button class="cart" @click="small++, addBtnClicked = ! addBtnClicked">Add to cart</button>
+                    <button
+                    class="addToCartBtn"
+                    @click="small++, addBtnClicked = ! addBtnClicked"
+                    >
+                    Add to cart
+                    </button>
+                </div>
                 </div>
             </div>
         </div>
-            <div class="footer">
-                <div class="contact">
-                    <strong>Contact us at:</strong>
-                    (021)-541-1000
-
-                    <strong>twitter /fb /insta </strong> @perfectpizza
-                </div>
-                <div class="address">
-                    Pizza Plaza
-                    <br>
-                    Dough Road
-                    <br>
-                    Base Town
-                    <br>
-                    7890
+        <br>
+        <div class="row" style="background-color: pink; border-radius: 7px;padding: 15px;margin: 15px;">
+            <div class="col-6">
+                <div class="footer">
+                    <div class="contact">
+                        <strong>Contact us at:</strong>
+                        (021)-541-1000
+                        <strong>twitter /fb /insta </strong> @perfectpizza
+                    </div>
                 </div>
             </div>
+                <div class="col-6">
+                    <div class="address">
+                        Pizza Plaza
+                        <br />
+                        Dough Road
+                        <br />
+                        Base Town
+                        <br />
+                        7890
+                    </div>
+                </div>
         </div>
-
-</body>
-
+    </div>
+  </body>
 </html>
